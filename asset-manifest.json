@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/supermarket/static/css/main.41ef8343.chunk.css",
+    "main.js": "/supermarket/static/js/main.669f565d.chunk.js",
+    "main.js.map": "/supermarket/static/js/main.669f565d.chunk.js.map",
+    "runtime-main.js": "/supermarket/static/js/runtime-main.9606da99.js",
+    "runtime-main.js.map": "/supermarket/static/js/runtime-main.9606da99.js.map",
+    "static/css/2.260c6bb1.chunk.css": "/supermarket/static/css/2.260c6bb1.chunk.css",
+    "static/js/2.dc91ba25.chunk.js": "/supermarket/static/js/2.dc91ba25.chunk.js",
+    "static/js/2.dc91ba25.chunk.js.map": "/supermarket/static/js/2.dc91ba25.chunk.js.map",
+    "index.html": "/supermarket/index.html",
+    "precache-manifest.fcb5d38ff809c8ba08749c671ad1aa3b.js": "/supermarket/precache-manifest.fcb5d38ff809c8ba08749c671ad1aa3b.js",
+    "service-worker.js": "/supermarket/service-worker.js",
+    "static/css/2.260c6bb1.chunk.css.map": "/supermarket/static/css/2.260c6bb1.chunk.css.map",
+    "static/css/main.41ef8343.chunk.css.map": "/supermarket/static/css/main.41ef8343.chunk.css.map",
+    "static/js/2.dc91ba25.chunk.js.LICENSE.txt": "/supermarket/static/js/2.dc91ba25.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9606da99.js",
+    "static/css/2.260c6bb1.chunk.css",
+    "static/js/2.dc91ba25.chunk.js",
+    "static/css/main.41ef8343.chunk.css",
+    "static/js/main.669f565d.chunk.js"
+  ]
+}
