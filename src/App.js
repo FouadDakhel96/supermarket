@@ -10,12 +10,14 @@ import 'react-tiny-fab/dist/styles.css';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import { AllModules } from '@ag-grid-enterprise/all-modules';
 
 import DetailCellRenderer from './DetailCellRenderer.js';
 import { MenuModule } from '@ag-grid-enterprise/menu';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { MasterDetailModule } from '@ag-grid-enterprise/master-detail';
 import { ColumnsToolPanelModule } from '@ag-grid-enterprise/column-tool-panel';
+import { RowGroupingModule } from '@ag-grid-enterprise/row-grouping';
 
 let data_to_arrange =
 [
@@ -31453,20 +31455,21 @@ class App extends Component {
     this.state = {
       modules: [
         ClientSideRowModelModule,
-        MasterDetailModule,
-        MenuModule,
-        ColumnsToolPanelModule,
+        // MasterDetailModule,
+        // MenuModule,
+        // ColumnsToolPanelModule,
+        AllModules
       ],
       detailCellRenderer: 'myDetailCellRenderer',
       frameworkComponents: { myDetailCellRenderer: DetailCellRenderer },
       columnDefs:[
         { headerName:'Category', field:'category', rowGroup: true,hide:true},
         { headerName:'SubCategory', field:'subcategory', rowGroup: true,hide:true},
-        { headerName:'Type', field:'type', rowGroup: true,hide:true},
-        { headerName:'Brand', field:'brand', rowGroup: true,hide:true},
-        { headerName:'Barcode', field:'barcode',cellRenderer: 'agGroupCellRenderer',minWidth:300},
+        { headerName:'Barcode', field:'barcode',checkbox:true,cellRenderer: 'agGroupCellRenderer',minWidth:300,cellStyle: {  }},
         { headerName:'Product Name', field:'name',minWidth:300},
         { headerName:'Price', field:'price'},
+        { headerName:'Brand', field:'brand'},
+        { headerName:'Type', field:'type',sort: 'asc',filter: 'agTextColumnFilter'},
         { headerName:'Last Scan', field:'last_scan'},
         { headerName:'Picture', field:'image',hide:true},
       ],
@@ -31475,13 +31478,22 @@ class App extends Component {
       ],
       selected:false,
       detailRowHeight: 250,
+      sideBar:'filters',
+      autoGroupColumnDef: {
+        headerName: 'Products tree',
+        field: 'tree',
+        minWidth: 250,
+        cellRenderer: 'agGroupCellRenderer',
+        cellRendererParams: { checkbox: true },
+        // sideBar: 'filters'
+      },
     };
   }
 
 
   componentDidMount() {
     this.arrange_data(data_to_arrange)
-    // console.log(this.gridApi.getSelectedNodes());
+    // console.log(gridApi.getSelectedNodes());
   }
 
 
@@ -31518,6 +31530,7 @@ class App extends Component {
     const selectedDataStringPresentation = selectedData.map( node => node.barcode + ' ' + node.name).join(', ')
     alert(`Selected nodes: ${selectedDataStringPresentation}`)
     this.setState({selected:true})
+
   }
 
   onFirstDataRendered = params => {
@@ -31549,7 +31562,8 @@ class App extends Component {
                 defaultColDef:{
                   sortable:true,
                   filter:true,
-                  resizable:true
+                  resizable:true,
+                  minWidth: 100,
                 },
                 enableRangeSelection: true,
                 animateRows: true,
@@ -31560,6 +31574,10 @@ class App extends Component {
               modules={this.state.modules}
               masterDetail={true}
               detailRowHeight={this.state.detailRowHeight}
+
+              autoGroupColumnDef={this.state.autoGroupColumnDef}
+              groupSelectsChildren={true}
+              sideBar={this.state.sideBar}
             />
 
 
@@ -31573,7 +31591,7 @@ class App extends Component {
               }}>
                 <Action text="تحديث المنتجات المختارة" onClick={this.onButtonClick}/>
               <Action text="تعطيل المنتجات المختارة" onClick={this.onButtonClick}>
-                  
+
                 </Action>
             </Fab>
           </div>

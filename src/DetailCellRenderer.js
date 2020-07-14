@@ -50,7 +50,7 @@ class  DetailCellRenderer extends Component {
 
         <div className="boxShadow" style={{borderRadius: 8,padding: 10,display: 'flex',flexDirection: 'column',backgroundColor: 'white',width: this.state.hideImage ? '45%' :'25%',height: '100%',alignItems: 'center',justifyContent: 'space-between'}}>
           <h1 className="customFont"style={{fontSize: this.state.reduceFont ? 20 : 30}}>الباركود</h1>
-        <Barcode value={this.state.barcode} format={'EAN13'} width={this.state.reduceFont ? 1 : 2}/>
+        <Barcode value={this.state.barcode} format={this.state.barcode.length===13 ? "EAN13" : this.state.barcode.length===8 ? "EAN8" : "UPC"} width={this.state.reduceFont ? 1 : 2}/>
         </div>
 
         {
