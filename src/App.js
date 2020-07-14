@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Button from '@material-ui/core/Button';
 import 'ag-grid-enterprise';
 // import {LicenseManager} from "@ag-grid-enterprise/core";
 // LicenseManager.setLicenseKey("CompanyName=Nana App,LicensedApplication=Nana,LicenseType=SingleApplication,LicensedConcurrentDeveloperCount=1,LicensedProductionInstancesCount=0,AssetReference=AG-007641,ExpiryDate=4_April_2021_[v2]_MTYxNzQ5MDgwMDAwMA==02501823a658a777b517236e0ef75323");
 import { Fab, Action } from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
 
-import AddIcon from '@material-ui/icons/Add';
+// import AddIcon from '@material-ui/icons/Add';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
@@ -31569,12 +31568,12 @@ class App extends Component {
             {/* <Fab color="primary" aria-label="add" >
               <AddIcon />
             </Fab> */}
-            <Fab icon={<AddIcon />} position={{right:0,bottom:0}} alwaysShowTitle={true} event={'click'} mainButtonStyles={{
+            <Fab icon={"+"} position={{right:0,bottom:0}} alwaysShowTitle={true} event={'click'} mainButtonStyles={{
                 backgroundColor: '#6EB536',
               }}>
                 <Action text="تحديث المنتجات المختارة" onClick={this.onButtonClick}/>
               <Action text="تعطيل المنتجات المختارة" onClick={this.onButtonClick}>
-                  <AddIcon />
+                  
                 </Action>
             </Fab>
           </div>
