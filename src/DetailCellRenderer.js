@@ -36,21 +36,21 @@ class  DetailCellRenderer extends Component {
         justifyContent: 'space-between',alignItems: 'center'}}>
 
         <div className="boxShadow" style={{padding: 10,backgroundColor: 'white',borderRadius: 8,display: 'flex',flexDirection: 'column',justifyContent: 'space-between',alignItems: 'center',width: '40%',height: 180}}>
-          <div>
+          {/* <div>
             <h1 className="customFont" style={{fontSize: this.state.reduceFont ? 20 : 30}}>صورة المنتج</h1>
-          </div>
+          </div> */}
           <div>
             <img
               src={this.state.image}
               alt="صورة المنتج"
-              style={{height: 100,maxWidth: '90%'}}
+              style={{maxHeight: 160,maxWidth: '90%'}}
             />
           </div>
         </div>
 
         <div className="boxShadow" style={{borderRadius: 8,padding: 10,display: 'flex',flexDirection: 'column',backgroundColor: 'white',width: this.state.hideImage ? '45%' :'25%',height: '100%',alignItems: 'center',justifyContent: 'space-between'}}>
-          <h1 className="customFont"style={{fontSize: this.state.reduceFont ? 20 : 30}}>الباركود</h1>
-        <Barcode value={this.state.barcode} format={this.state.barcode.length===13 ? "EAN13" : this.state.barcode.length===8 ? "EAN8" : "UPC"} width={this.state.reduceFont ? 1 : 2}/>
+          {/* <h1 className="customFont"style={{fontSize: this.state.reduceFont ? 20 : 30}}>الباركود</h1> */}
+          <Barcode value={this.state.barcode} format={this.state.barcode.length===13 ? "EAN13" : this.state.barcode.length===8 ? "EAN8" : "UPC"} width={this.state.reduceFont ? 1 : 2}/>
         </div>
 
         {

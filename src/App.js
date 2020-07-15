@@ -18,6 +18,8 @@ import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-mod
 import { MasterDetailModule } from '@ag-grid-enterprise/master-detail';
 import { ColumnsToolPanelModule } from '@ag-grid-enterprise/column-tool-panel';
 import { RowGroupingModule } from '@ag-grid-enterprise/row-grouping';
+import { SetFilterModule } from '@ag-grid-enterprise/set-filter';
+
 
 let data_to_arrange =
 [
@@ -31455,30 +31457,62 @@ class App extends Component {
     this.state = {
       modules: [
         ClientSideRowModelModule,
-        // MasterDetailModule,
-        // MenuModule,
-        // ColumnsToolPanelModule,
-        AllModules
+        AllModules,
+        SetFilterModule,
       ],
       detailCellRenderer: 'myDetailCellRenderer',
       frameworkComponents: { myDetailCellRenderer: DetailCellRenderer },
       columnDefs:[
-        { headerName:'Category', field:'category', rowGroup: true,hide:true},
-        { headerName:'SubCategory', field:'subcategory', rowGroup: true,hide:true},
-        { headerName:'Barcode', field:'barcode',checkbox:true,cellRenderer: 'agGroupCellRenderer',minWidth:300,cellStyle: {  }},
-        { headerName:'Product Name', field:'name',minWidth:300},
-        { headerName:'Price', field:'price'},
-        { headerName:'Brand', field:'brand'},
-        { headerName:'Type', field:'type',sort: 'asc',filter: 'agTextColumnFilter'},
-        { headerName:'Last Scan', field:'last_scan'},
-        { headerName:'Picture', field:'image',hide:true},
+        {
+          headerName: 'Category',
+          field: 'category',
+          rowGroup: true,
+          hide: true,
+          enableRowGroup: true
+        }, {
+          headerName: 'SubCategory',
+          field: 'subcategory',
+          rowGroup: true,
+          hide: true,
+          enableRowGroup: true
+        }, {
+          headerName: 'Barcode',
+          field: 'barcode',
+          checkbox: true,
+          cellRenderer: 'agGroupCellRenderer',
+          minWidth: 300,
+        }, {
+          headerName: 'Product Name',
+          field: 'name',
+          minWidth: 300
+        }, {
+          headerName: 'Price',
+          field: 'price'
+        }, {
+          headerName: 'Brand',
+          field: 'brand',
+          enableRowGroup: true
+        }, {
+          headerName: 'Type',
+          field: 'type',
+          sort: 'asc',
+          filter: 'agTextColumnFilter',
+          enableRowGroup: true
+        }, {
+          headerName: 'Last Scan',
+          field: 'last_scan'
+        }, {
+          headerName: 'Picture',
+          field: 'image',
+          hide: true
+        },
       ],
       rowData:[
         // { name: 'Toyota', price: 1500, category:'Laban',brand:'Maraie'}
       ],
       selected:false,
       detailRowHeight: 250,
-      sideBar:'filters',
+      sideBar:'columns',
       autoGroupColumnDef: {
         headerName: 'Products tree',
         field: 'tree',
@@ -31499,7 +31533,7 @@ class App extends Component {
 
 
   arrange_data = async (data) => {
-    console.log(data);
+
     let returned_data = []
     await data.map(item =>(
       item.main_category
@@ -31521,7 +31555,6 @@ class App extends Component {
     await this.setState({
       rowData:returned_data
     })
-    console.log('done');
   }
 
   onButtonClick = () => {
@@ -31532,6 +31565,10 @@ class App extends Component {
     this.setState({selected:true})
 
   }
+
+  closeToolPanel = () => {
+    this.gridApi.closeToolPanel();
+  };
 
   onFirstDataRendered = params => {
     params.api.forEachNode(function(node) {
@@ -31552,7 +31589,12 @@ class App extends Component {
           </div>
           <div className="ag-theme-balham" style={{width:'100%',height:800}}>
             <AgGridReact
-              onGridReady={ params => this.gridApi = params.api }
+              onGridReady={
+                params => {
+                  this.gridApi = params.api
+                  this.closeToolPanel()
+                }
+              }
               columnDefs={this.state.columnDefs}
               rowData={this.state.rowData}
               headerHeight={80}
@@ -31566,7 +31608,7 @@ class App extends Component {
                   minWidth: 100,
                 },
                 enableRangeSelection: true,
-                animateRows: true,
+                animateRows: true
               }}
               detailCellRenderer={this.state.detailCellRenderer}
               frameworkComponents={this.state.frameworkComponents}
@@ -31589,7 +31631,7 @@ class App extends Component {
             <Fab icon={"+"} position={{right:0,bottom:0}} alwaysShowTitle={true} event={'click'} mainButtonStyles={{
                 backgroundColor: '#6EB536',
               }}>
-                <Action text="تحديث المنتجات المختارة" onClick={this.onButtonClick}/>
+                <Action text="تحديث المنتجات المختارة" onClick={this.closeToolPanel}/>
               <Action text="تعطيل المنتجات المختارة" onClick={this.onButtonClick}>
 
                 </Action>
