@@ -31463,19 +31463,7 @@ class App extends Component {
       detailCellRenderer: 'myDetailCellRenderer',
       frameworkComponents: { myDetailCellRenderer: DetailCellRenderer },
       columnDefs:[
-        {
-          headerName: 'Category',
-          field: 'category',
-          rowGroup: true,
-          hide: true,
-          enableRowGroup: true
-        }, {
-          headerName: 'SubCategory',
-          field: 'subcategory',
-          rowGroup: true,
-          hide: true,
-          enableRowGroup: true
-        }, {
+         {
           headerName: 'Barcode',
           field: 'barcode',
           checkbox: true,
@@ -31488,16 +31476,31 @@ class App extends Component {
         }, {
           headerName: 'Price',
           field: 'price'
+        },
+        {
+          headerName: 'Category',
+          field: 'category',
+
+          enableRowGroup: true
+        }, {
+          headerName: 'SubCategory',
+          field: 'subcategory',
+
+          enableRowGroup: true
         }, {
           headerName: 'Brand',
           field: 'brand',
-          enableRowGroup: true
+          enableRowGroup: true,
+          rowGroup: true,
+          hide: true,
         }, {
           headerName: 'Type',
           field: 'type',
           sort: 'asc',
           filter: 'agTextColumnFilter',
-          enableRowGroup: true
+          enableRowGroup: true,
+          rowGroup: true,
+          hide: true,
         }, {
           headerName: 'Last Scan',
           field: 'last_scan'
