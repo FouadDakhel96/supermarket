@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'ag-grid-enterprise';
-// import {LicenseManager} from "@ag-grid-enterprise/core";
-// LicenseManager.setLicenseKey("CompanyName=Nana App,LicensedApplication=Nana,LicenseType=SingleApplication,LicensedConcurrentDeveloperCount=1,LicensedProductionInstancesCount=0,AssetReference=AG-007641,ExpiryDate=4_April_2021_[v2]_MTYxNzQ5MDgwMDAwMA==02501823a658a777b517236e0ef75323");
 import { Fab, Action } from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
 
-// import AddIcon from '@material-ui/icons/Add';
 import { AgGridReact } from 'ag-grid-react';
+
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
 
 import DetailCellRenderer from './DetailCellRenderer.js';
-import { MenuModule } from '@ag-grid-enterprise/menu';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-import { MasterDetailModule } from '@ag-grid-enterprise/master-detail';
-import { ColumnsToolPanelModule } from '@ag-grid-enterprise/column-tool-panel';
-import { RowGroupingModule } from '@ag-grid-enterprise/row-grouping';
 import { SetFilterModule } from '@ag-grid-enterprise/set-filter';
+
+import {LicenseManager} from "@ag-grid-enterprise/core";
+LicenseManager.setLicenseKey("CompanyName=Nana App,LicensedApplication=Nana,LicenseType=SingleApplication,LicensedConcurrentDeveloperCount=1,LicensedProductionInstancesCount=0,AssetReference=AG-007641,ExpiryDate=4_April_2021_[v2]_MTYxNzQ5MDgwMDAwMA==02501823a658a777b517236e0ef75323");
 
 
 let data_to_arrange =
@@ -31451,6 +31448,7 @@ let data_to_arrange =
     "price": 24.000000
   }
 ]
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -31533,8 +31531,6 @@ class App extends Component {
     // console.log(gridApi.getSelectedNodes());
   }
 
-
-
   arrange_data = async (data) => {
 
     let returned_data = []
@@ -31563,7 +31559,7 @@ class App extends Component {
   onButtonClick = () => {
     const selectedNodes = this.gridApi.getSelectedNodes()
     const selectedData = selectedNodes.map( node => node.data )
-    const selectedDataStringPresentation = selectedData.map( node => node.barcode + ' ' + node.name).join(', ')
+    const selectedDataStringPresentation = selectedData.map( node => node.barcode ).join(', ')
     alert(`Selected nodes: ${selectedDataStringPresentation}`)
     this.setState({selected:true})
 
@@ -31595,6 +31591,7 @@ class App extends Component {
               onGridReady={
                 params => {
                   this.gridApi = params.api
+                  this.gridColumnApi = params.columnApi
                   this.closeToolPanel()
                 }
               }
@@ -31619,7 +31616,7 @@ class App extends Component {
               modules={this.state.modules}
               masterDetail={true}
               detailRowHeight={this.state.detailRowHeight}
-
+              // suppressCsvExport={true}
               autoGroupColumnDef={this.state.autoGroupColumnDef}
               groupSelectsChildren={true}
               sideBar={this.state.sideBar}
